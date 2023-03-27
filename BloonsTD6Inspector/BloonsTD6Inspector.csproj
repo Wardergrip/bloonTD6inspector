@@ -89,6 +89,7 @@
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="ViewModel\DetailedPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\Converters\StringToFullCapsConverter.cs" />
     <Compile Include="View\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>

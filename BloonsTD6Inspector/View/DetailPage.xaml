@@ -5,9 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BloonsTD6Inspector.View"
       xmlns:vm="clr-namespace:BloonsTD6Inspector.ViewModel"
+      xmlns:conv="clr-namespace:BloonsTD6Inspector.View.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DetailPage">
+    <Page.Resources>
+        <conv:StringToFullCapsConverter x:Key="StringToFullCaps"/>
+    </Page.Resources>
     <Page.DataContext>
         <vm:DetailedPageVM/>
     </Page.DataContext>
@@ -26,6 +30,11 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Label Grid.Column="0" Content="{Binding InspectedObject.Type,Converter={StaticResource StringToFullCaps}}" Foreground="Red"/>
+                    <Label Grid.Column="0" Content="{Binding InspectedObject.Name,Converter={StaticResource StringToFullCaps}}"/>
+                </StackPanel>
+
                 <Image Grid.Column="1" Source="{Binding InspectedObject.ImageURL}"/>
             </Grid>
             <Grid Grid.Row="1">

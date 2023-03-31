@@ -31,8 +31,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <Label Grid.Column="0" Content="{Binding InspectedObject.Type,Converter={StaticResource StringToFullCaps}}" Foreground="Red"/>
+                    <Label Grid.Column="0" Content="{Binding InspectedObject.ObjectType,Converter={StaticResource StringToFullCaps}}" Foreground="Red"/>
                     <Label Grid.Column="0" Content="{Binding InspectedObject.Name,Converter={StaticResource StringToFullCaps}}"/>
+                    <Label Grid.Column="0" Content="{Binding InspectedObject.Description}"/>
                 </StackPanel>
 
                 <Image Grid.Column="1" Source="{Binding InspectedObject.ImageURL}"/>
@@ -43,6 +44,15 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                    <Label Content="Stats"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <Label Content="Cost"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                    <Label Content="Info"/>
+                </StackPanel>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

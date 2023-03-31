@@ -9,6 +9,7 @@ namespace BloonsTD6Inspector.Model
 {
     public class GameObject
     {
+        public string ObjectType { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,9 +19,8 @@ namespace BloonsTD6Inspector.Model
         { 
             get
             {
-                string imageName = (Id == "bloon") ? "base" : Type;
-                string typeName = (Type == "hero") ? "heroes" : Type + "s";
-                Console.WriteLine($"https://statsnite.com/images/btd/{typeName}/{Id}/{imageName}.png");
+                string imageName = (Id == "bloon") ? "base" : ObjectType;
+                string typeName = ObjectType == "hero"? "heroes" : ObjectType + "s";
                 return $"https://statsnite.com/images/btd/{typeName}/{Id}/{imageName}.png";
             }
         }

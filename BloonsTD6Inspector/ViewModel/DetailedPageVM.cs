@@ -10,13 +10,25 @@ namespace BloonsTD6Inspector.ViewModel
 {
     public class DetailedPageVM : ObservableObject
     {
-        public GameObject InspectedObject { get; set; }
+        private GameObject _inspectedObject;
+        public GameObject InspectedObject
+        {
+            get
+            {
+                return _inspectedObject;
+            }
+            set
+            {
+                _inspectedObject = value;
+                OnPropertyChanged(nameof(InspectedObject));
+            }
+        }
 
         public DetailedPageVM() 
         {
             InspectedObject = new GameObject()
             {
-                Type = "hero",
+                ObjectType = "hero",
                 Name = "quincy",
                 Description = "Proud, strong and intelligent, Quincy uses his bow to perform feats of amazing skill.",
                 Id = "quincy"

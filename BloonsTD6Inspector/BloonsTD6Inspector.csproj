@@ -86,7 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\GameObject.cs" />
+    <Compile Include="Model\Tower.cs" />
     <Compile Include="Repository\APIRepos.cs" />
     <Compile Include="ViewModel\DetailedPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

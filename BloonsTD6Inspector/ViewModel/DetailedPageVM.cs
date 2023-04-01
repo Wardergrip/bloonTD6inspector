@@ -1,5 +1,6 @@
 ﻿using BloonsTD6Inspector.Model;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,10 @@ namespace BloonsTD6Inspector.ViewModel
 {
     public class DetailedPageVM : ObservableObject
     {
-        private GameObject _inspectedObject;
-        public GameObject InspectedObject
+        public static MainViewModel MainVM { get; set; }
+
+        private Tower _inspectedObject;
+        public Tower InspectedObject
         {
             get
             {
@@ -24,15 +27,24 @@ namespace BloonsTD6Inspector.ViewModel
             }
         }
 
+        public RelayCommand GoBackCommand { get; set; }
+
         public DetailedPageVM() 
         {
-            InspectedObject = new GameObject()
+            InspectedObject = new Tower()
             {
-                ObjectType = "hero",
-                Name = "quincy",
-                Description = "Proud, strong and intelligent, Quincy uses his bow to perform feats of amazing skill.",
-                Id = "quincy"
+                ObjectType = "tower",
+                Name = "Dart Monkey",
+                Description = "Placeholder text for dart monkey",
+                Id = "dart-monkey",
+                DefaultHotkey = "f"
             };
+            GoBackCommand = new RelayCommand(GoBack);
+        }
+
+        private void GoBack()
+        {
+            MainVM.SwitchPage();
         }
     }
 }

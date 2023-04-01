@@ -15,11 +15,11 @@ namespace BloonsTD6Inspector.ViewModel
         public static MainViewModel MainVM { get; set; }
 
         private APIRepos Repository { get; set; }
-        public List<GameObject> GameObjects { get; private set; }
+        public List<Tower> GameObjects { get; private set; }
         private string _selectedType;
 
-        private GameObject _selectedGameObject;
-        public GameObject SelectedGameObject
+        private Tower _selectedGameObject;
+        public Tower SelectedGameObject
         {
             get { return _selectedGameObject; }
             set 

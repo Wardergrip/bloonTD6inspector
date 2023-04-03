@@ -91,7 +91,9 @@
     <Compile Include="ViewModel\DetailedPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverviewPageVM.cs" />
+    <Compile Include="View\Converters\LengthToRowsConverter.cs" />
     <Compile Include="View\Converters\StringToFullCapsConverter.cs" />
+    <Compile Include="View\Converters\WidthToColumnsConverter.cs" />
     <Compile Include="View\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>

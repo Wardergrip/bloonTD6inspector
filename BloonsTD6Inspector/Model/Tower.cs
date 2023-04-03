@@ -88,5 +88,51 @@ namespace BloonsTD6Inspector.Model
                 return $"https://statsnite.com/images/btd/{ObjectType + "s"}/{Id}/{ObjectType}.png";
             }
         }
+
+        [JsonIgnore]
+        public List<string> Path1Images 
+        {  
+            get
+            {
+                List<string> result = new List<string>();
+
+                for (int i = 1; i <= 5; ++i)
+                {
+                    result.Add($"https://statsnite.com/images/btd/towers/{Id}/{i}00.png");
+                }
+
+                return result;
+            }
+        }
+        [JsonIgnore]
+        public List<string> Path2Images 
+        { 
+            get
+            {
+                List<string> result = new List<string>();
+
+                for (int i = 1; i <= 5; ++i)
+                {
+                    result.Add($"https://statsnite.com/images/btd/towers/{Id}/0{i}0.png");
+                }
+
+                return result;
+            }
+        }
+        [JsonIgnore]
+        public List<string> Path3Images 
+        { 
+            get
+            {
+                List<string> result = new List<string>();
+
+                for (int i = 1; i <= 5; ++i)
+                {
+                    result.Add($"https://statsnite.com/images/btd/towers/{Id}/00{i}.png");
+                }
+
+                return result;
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@
     <Page.DataContext>
         <vm:DetailedPageVM/>
     </Page.DataContext>
-    <Grid>
-        <Grid.Resources>
+    <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <StackPanel.Resources>
             <SolidColorBrush x:Key="typeColor" Color="IndianRed"/>
             <SolidColorBrush x:Key="nameColor" Color="White"/>
             <SolidColorBrush x:Key="descriptionColor" Color="#B0D0F9"/>
@@ -36,17 +36,13 @@
             </Style>
             <Style TargetType="Label" x:Key="valStyle">
             </Style>
-        </Grid.Resources>
-        <Grid.Background>
+        </StackPanel.Resources>
+        <StackPanel.Background>
             <SolidColorBrush Color="#0B122E"/>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        </StackPanel.Background>
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>
+                <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -54,11 +50,13 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Margin="10" Grid.Column="0">
-                    <Label Grid.Column="0" Content="{Binding InspectedObject.ObjectType,Converter={StaticResource StringToFullCaps}}" Foreground="{StaticResource typeColor}" Style="{StaticResource typeStyle}"/>
-                    <Label Grid.Column="0" Content="{Binding InspectedObject.Name,Converter={StaticResource StringToFullCaps}}" Foreground="{StaticResource nameColor}" Style="{StaticResource nameStyle}"/>
-                    <Label Grid.Column="0" Content="{Binding InspectedObject.Description}" Foreground="{StaticResource descriptionColor}" Style="{StaticResource descStyle}"/>
-                </StackPanel>
+                <Viewbox Grid.Column="0" Margin="10" HorizontalAlignment="Left">
+                    <StackPanel>
+                        <Label Grid.Column="0" Content="{Binding InspectedObject.ObjectType,Converter={StaticResource StringToFullCaps}}" Foreground="{StaticResource typeColor}" Style="{StaticResource typeStyle}"/>
+                        <Label Grid.Column="0" Content="{Binding InspectedObject.Name,Converter={StaticResource StringToFullCaps}}" Foreground="{StaticResource nameColor}" Style="{StaticResource nameStyle}"/>
+                        <Label Grid.Column="0" Content="{Binding InspectedObject.Description}" Foreground="{StaticResource descriptionColor}" Style="{StaticResource descStyle}"/>
+                    </StackPanel>
+                </Viewbox>
 
                 <Image Grid.Column="1" Source="{Binding InspectedObject.ImageURL}"/>
             </Grid>
@@ -69,83 +67,111 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <!--Stats-->
-                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                    <Label Content="Stats" Foreground="{StaticResource sectionColor}" HorizontalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Damage: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Stats.Damage, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                <Viewbox Grid.Column="0">
+                    <StackPanel HorizontalAlignment="Center">
+                        <Label Content="Stats" Foreground="{StaticResource sectionColor}" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Damage: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Stats.Damage, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Pierce: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Stats.Pierce, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Attack speed: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Stats.AttackSpeed, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Range: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Stats.Range, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Pierce: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Stats.Pierce, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Attack speed: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Stats.AttackSpeed, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Range: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Stats.Range, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                </StackPanel>
+                </Viewbox>
                 <!--Cost-->
-                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <Label Content="Cost" Foreground="{StaticResource sectionColor}" HorizontalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Easy: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Cost.EasyCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                <Viewbox Grid.Column="1">
+                    <StackPanel HorizontalAlignment="Center">
+                        <Label Content="Cost" Foreground="{StaticResource sectionColor}" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Easy: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Cost.EasyCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Medium: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Cost.MediumCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Hard: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Cost.HardCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Impoppable: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Cost.ImpoppableCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Medium: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Cost.MediumCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Hard: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Cost.HardCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Impoppable: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Cost.ImpoppableCost, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                </StackPanel>
+                </Viewbox>
                 <!--Info-->
-                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                    <Label Content="Info" Foreground="{StaticResource sectionColor}" HorizontalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Type: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Type, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                <Viewbox Grid.Column="2">
+                    <StackPanel HorizontalAlignment="Center">
+                        <Label Content="Info" Foreground="{StaticResource sectionColor}" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Type: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Type, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Footprint: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.Footprint, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+                            <Label Content="Hotkey: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
+                            <Label Content="{Binding InspectedObject.DefaultHotkey,Converter={StaticResource StringToFullCaps}}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Footprint: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.Footprint, FallbackValue=xx}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
-                        <Label Content="Hotkey: " Foreground="{StaticResource generalColor}" Style="{StaticResource genStyle}"/>
-                        <Label Content="{Binding InspectedObject.DefaultHotkey,Converter={StaticResource StringToFullCaps}}" Foreground="{StaticResource generalColor}" Style="{StaticResource valStyle}"/>
-                    </StackPanel>
-                </StackPanel>
+                </Viewbox>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <Label Content="UPGRADES" HorizontalAlignment="Center" Foreground="{StaticResource typeColor}" Style="{StaticResource typeStyle}"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Path 1" Grid.Column="0" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
-                    <StackPanel HorizontalAlignment="Center">
-                        
-                    </StackPanel>
-                    <Label Content="Path 2" Grid.Column="1" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
-                    <Label Content="Path 3" Grid.Column="2" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
-                </Grid>
-            </StackPanel>
-        </Grid>
-    </Grid>
+        <ListBox Background="#101B3A">
+            <Label Content="UPGRADES" HorizontalAlignment="Center" Foreground="{StaticResource typeColor}" Style="{StaticResource typeStyle}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="Path 1" Grid.Column="0" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
+                <ListBox ItemsSource="{Binding InspectedObject.Path1Images}" Grid.Column="0" HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Margin="0,20,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="100">
+                                <Image Source="{Binding}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="Path 2" Grid.Column="1" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
+                <ListBox ItemsSource="{Binding InspectedObject.Path2Images}" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Margin="0,20,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="100">
+                                <Image Source="{Binding}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="Path 3" Grid.Column="2" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
+                <ListBox ItemsSource="{Binding InspectedObject.Path3Images}" Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Margin="0,20,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="100">
+                                <Image Source="{Binding}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </ListBox>
+    </StackPanel>
 </Page>

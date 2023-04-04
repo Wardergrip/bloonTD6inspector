@@ -17,7 +17,12 @@
         <conv:HeightToRowsConverter x:Key="HeightToRows"/>
     </Page.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding GameObjects}" SelectedItem="{Binding SelectedGameObject}" Background="#0B122E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ComboBox ItemsSource="{Binding TowerTypes}" SelectedItem="{Binding SelectedType}"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding GameObjects}" SelectedItem="{Binding SelectedGameObject}" Background="#0B122E">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <!--<WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" 

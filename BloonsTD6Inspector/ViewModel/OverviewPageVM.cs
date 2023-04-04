@@ -16,7 +16,19 @@ namespace BloonsTD6Inspector.ViewModel
 
         private APIRepos Repository { get; set; }
         public List<Tower> GameObjects { get; private set; }
+
+        public List<string> TowerTypes { get; private set; }
         private string _selectedType;
+        public string SelectedType
+        {
+            get { return _selectedType; }
+            set
+            {
+                _selectedType = value;
+                LoadTypedGameObjects(_selectedType);
+                OnPropertyChanged(nameof(SelectedType));
+            }
+        }
 
         private Tower _selectedGameObject;
         public Tower SelectedGameObject
@@ -29,18 +41,6 @@ namespace BloonsTD6Inspector.ViewModel
             }
         }
 
-        public string SelectedType
-        {
-            get { return _selectedType; }
-            set
-            {
-                _selectedType = value;
-                //GameObjects = Repository.GetPokemons(value);
-                //OnPropertyChanged(nameof(SelectedType));
-                //OnPropertyChanged(nameof(GameObjects));
-            }
-        }
-
         public OverviewPageVM()
         {
             Repository = new APIRepos();
@@ -49,6 +49,16 @@ namespace BloonsTD6Inspector.ViewModel
         public async void LoadGameObjects()
         {
             GameObjects = await Repository.GetTowersAsync();
+            var towers = await Repository.GetTowersAsync();
+            TowerTypes = towers.Select(x => x.Type).Distinct().ToList();
+            TowerTypes.Add("All");
+            OnPropertyChanged(nameof(GameObjects));
+            OnPropertyChanged(nameof(TowerTypes));
+        }
+
+        public async void LoadTypedGameObjects(string type)
+        {
+            GameObjects = await Repository.GetTowersAsync(type);
             OnPropertyChanged(nameof(GameObjects));
         }
     }

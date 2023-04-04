@@ -14,17 +14,11 @@ namespace BloonsTD6Inspector.Repository
         // Class
 
         private List<Tower> _gameObjects;
-        public List<Tower> GetGameObjects()
-        {
-            if (_gameObjects == null)
-            {
-
-            }
-            return _gameObjects;
-        }
 
         public async Task<List<Tower>> GetTowersAsync()
         {
+            if (_gameObjects != null) { return _gameObjects; }
+
             using (HttpClient client = new HttpClient())
             {
                 string endpoint = $"https://statsnite.com/api/btd/v3/towers";
@@ -53,7 +47,8 @@ namespace BloonsTD6Inspector.Repository
                         }
                     }
 
-                    return towers.ToList();
+                    _gameObjects = towers.ToList();
+                    return _gameObjects;
                 }
                 catch (Exception ex)
                 {
@@ -62,6 +57,19 @@ namespace BloonsTD6Inspector.Repository
             }
 
             return null;
+        }
+
+        public async Task<List<Tower>> GetTowersAsync(string type)
+        {
+            if (_gameObjects == null)
+            {
+                await GetTowersAsync();
+            }
+            if (type == "All")
+            {
+                return _gameObjects;
+            }
+            return _gameObjects.Where(x => x.Type == type).ToList();
         }
     }
 }

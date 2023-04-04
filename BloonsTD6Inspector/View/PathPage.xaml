@@ -1,0 +1,88 @@
+﻿<Page x:Class="BloonsTD6Inspector.View.PathPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BloonsTD6Inspector.View"
+      xmlns:vm="clr-namespace:BloonsTD6Inspector.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PathPage">
+    <Page.DataContext>
+        <vm:DetailedPageVM/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.Resources>
+            <SolidColorBrush x:Key="typeColor" Color="IndianRed"/>
+            <SolidColorBrush x:Key="nameColor" Color="White"/>
+            <SolidColorBrush x:Key="descriptionColor" Color="#B0D0F9"/>
+            <SolidColorBrush x:Key="sectionColor" Color="White"/>
+            <SolidColorBrush x:Key="generalColor" Color="#C2D0F9"/>
+            <Style TargetType="TextBlock" x:Key="typeStyle">
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="nameStyle">
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="descStyle">
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="genStyle">
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="valStyle">
+            </Style>
+        </Grid.Resources>
+        <Grid.Background>
+            <SolidColorBrush Color="#0B122E"/>
+        </Grid.Background>
+
+        <Viewbox Grid.Row="1" Margin="0,0,0,30">
+            <Grid Grid.Row="1">
+                <StackPanel>
+                    <TextBlock Text="UPGRADES" HorizontalAlignment="Center" Foreground="{StaticResource typeColor}" Style="{StaticResource typeStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Path 1" Grid.Column="0" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
+                        <ListBox ItemsSource="{Binding InspectedObject.Path1Images}" Grid.Column="0" HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Margin="0,20,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Width="100">
+                                        <Image Source="{Binding}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock Text="Path 2" Grid.Column="1" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
+                        <ListBox ItemsSource="{Binding InspectedObject.Path2Images}" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Margin="0,20,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Width="100">
+                                        <Image Source="{Binding}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock Text="Path 3" Grid.Column="2" HorizontalAlignment="Center" Foreground="{StaticResource sectionColor}" Style="{StaticResource genStyle}"/>
+                        <ListBox ItemsSource="{Binding InspectedObject.Path3Images}" Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Margin="0,20,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Width="100">
+                                        <Image Source="{Binding}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Page>

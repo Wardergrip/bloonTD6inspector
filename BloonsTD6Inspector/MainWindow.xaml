@@ -14,8 +14,9 @@
         <Frame NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
         <Button VerticalAlignment="Bottom"
                 Command="{Binding SwitchPageCommand}"
-                Content="Back to overview"
+                Content="Go back"
                 Visibility="{Binding ButtonVisibility}"
+                Background="#C2D0F9" BorderThickness="0" Foreground="Black"
                 />
     </Grid>
 </Window>

@@ -28,6 +28,7 @@ namespace BloonsTD6Inspector.ViewModel
         }
 
         public RelayCommand GoBackCommand { get; set; }
+        public RelayCommand SeePathsCommand { get; set; }
 
         public DetailedPageVM() 
         {
@@ -40,11 +41,17 @@ namespace BloonsTD6Inspector.ViewModel
                 DefaultHotkey = "f"
             };
             GoBackCommand = new RelayCommand(GoBack);
+            SeePathsCommand = new RelayCommand(SeePaths);
         }
 
         private void GoBack()
         {
             MainVM.SwitchPage();
+        }
+
+        private void SeePaths() 
+        {
+            MainVM.SeePaths();
         }
     }
 }

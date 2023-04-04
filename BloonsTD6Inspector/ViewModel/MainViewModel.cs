@@ -17,6 +17,7 @@ namespace BloonsTD6Inspector.ViewModel
         public string ButtonVisibility { get; private set; }
         public OverviewPage MainPage { get; private set; } = new OverviewPage();
         public DetailPage DetailedPage { get; private set; } = new DetailPage();
+        public PathPage PathPage { get; private set; } = new PathPage();
         public Page CurrentPage { get; private set; }
         
         public MainViewModel()
@@ -44,6 +45,13 @@ namespace BloonsTD6Inspector.ViewModel
                 OnPropertyChanged(nameof(ButtonVisibility));
                 OnPropertyChanged(nameof(CurrentPage));
             }
+            else if (CurrentPage is PathPage)
+            {
+                CurrentPage = DetailedPage;
+                ButtonVisibility = "Visible";
+                OnPropertyChanged(nameof(ButtonVisibility));
+                OnPropertyChanged(nameof(CurrentPage));
+            }
             else
             {
                 CurrentPage = MainPage;
@@ -51,6 +59,14 @@ namespace BloonsTD6Inspector.ViewModel
                 OnPropertyChanged(nameof(ButtonVisibility));
                 OnPropertyChanged(nameof(CurrentPage));
             }
+        }
+
+        public void SeePaths()
+        {
+            CurrentPage = PathPage;
+            ButtonVisibility = "Visible";
+            OnPropertyChanged(nameof(ButtonVisibility));
+            OnPropertyChanged(nameof(CurrentPage));
         }
     }
 }

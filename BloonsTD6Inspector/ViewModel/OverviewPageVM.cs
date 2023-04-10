@@ -1,6 +1,7 @@
 ﻿using BloonsTD6Inspector.Model;
 using BloonsTD6Inspector.Repository;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,21 @@ namespace BloonsTD6Inspector.ViewModel
     {
         public static MainViewModel MainVM { get; set; }
 
-        private APIRepos Repository { get; set; }
+        private IRepos _repository;
+        private IRepos Repository
+        {
+            get
+            {
+                return _repository;
+            }
+            set
+            {
+                _repository = value;
+                LoadGameObjects();
+            }
+        }
+        private IRepos LocalRepos { get; set; }
+        private IRepos APIRepos { get; set; }
         public List<Tower> GameObjects { get; private set; }
 
         public List<string> TowerTypes { get; private set; }
@@ -41,10 +56,16 @@ namespace BloonsTD6Inspector.ViewModel
             }
         }
 
+        public RelayCommand SwitchReposCommand { get; private set; }
+        public string SwitchReposButtonText { get; private set; } = "Switch to local repos";
+
         public OverviewPageVM()
         {
-            Repository = new APIRepos();
-            LoadGameObjects();
+            APIRepos = new APIRepos();
+            LocalRepos = new LocalRepos();
+            Repository = APIRepos;
+
+            SwitchReposCommand = new RelayCommand(SwitchRepos);
         }
         public async void LoadGameObjects()
         {
@@ -60,6 +81,13 @@ namespace BloonsTD6Inspector.ViewModel
         {
             GameObjects = await Repository.GetTowersAsync(type);
             OnPropertyChanged(nameof(GameObjects));
+        }
+
+        public void SwitchRepos()
+        {
+            Repository = (Repository == APIRepos) ? LocalRepos : APIRepos;
+            SwitchReposButtonText = (Repository == APIRepos) ? "Switch to local repos" : "Switch to API repos";
+            OnPropertyChanged(nameof(SwitchReposButtonText));
         }
     }
 }

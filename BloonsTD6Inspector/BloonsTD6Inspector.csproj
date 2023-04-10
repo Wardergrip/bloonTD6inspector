@@ -88,6 +88,8 @@
     </ApplicationDefinition>
     <Compile Include="Model\Tower.cs" />
     <Compile Include="Repository\APIRepos.cs" />
+    <Compile Include="Repository\LocalRepos.cs" />
+    <Compile Include="Repository\IRepos.cs" />
     <Compile Include="ViewModel\DetailedPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverviewPageVM.cs" />

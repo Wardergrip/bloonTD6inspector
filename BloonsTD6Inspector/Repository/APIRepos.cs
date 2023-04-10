@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace BloonsTD6Inspector.Repository
 {
-    public class APIRepos
+    public class APIRepos : IRepos
     {
-        // Class
-
         private List<Tower> _gameObjects;
 
         public async Task<List<Tower>> GetTowersAsync()

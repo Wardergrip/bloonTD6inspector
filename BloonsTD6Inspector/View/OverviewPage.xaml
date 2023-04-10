@@ -20,6 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ComboBox ItemsSource="{Binding TowerTypes}" SelectedItem="{Binding SelectedType}"/>
         <ListBox Grid.Row="1" ItemsSource="{Binding GameObjects}" SelectedItem="{Binding SelectedGameObject}" Background="#0B122E">
@@ -41,5 +42,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Grid.Row="2" Content="{Binding SwitchReposButtonText}" Command="{Binding SwitchReposCommand}"/>
     </Grid>
 </Page>

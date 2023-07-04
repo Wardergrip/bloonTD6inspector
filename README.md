@@ -14,7 +14,7 @@ Each tower falls under a certain category. You have primary, military, magic and
 These paths change the visuals of the tower, both the icon and in game model.
 
 ## DAE / GD profile
-Games like Bloons TD6 have a very committed and community. Because of the nature of the game, the one that rewards micro optimisation, statistics and testing, players that want to reach the highest level of play will want to see the exact values the game uses. Often those values are hidden in the game from the player which makes tools to display these incredibly useful and wanted. Hence, I thought this is an excellent excercise and chose an API of a game that has a playerbase with this desire.
+Games like Bloons TD6 have a very committed community. Because of the nature of the game, the one that rewards micro optimisation, statistics and testing, players that want to reach the highest level of play will want to see the exact values the game uses. Often those values are hidden in the game from the player which makes tools to display these incredibly useful and wanted. Hence, I thought this is an excellent excercise and chose an API of a game that has a playerbase with this desire.
 
 ## Swapping repository
 By default, the application will use the API repository. If you want to change the default repository you can do that in `OverviewPageVM.cs` in the constructor of the class. Assigning a different class that implements the `IRepos` interface to the `Repository` property.
